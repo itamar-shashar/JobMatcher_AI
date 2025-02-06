@@ -62,7 +62,7 @@ pip install -r requirements.txt
 5. ⏳ **Expect an initial load time of 20-30 seconds.**
 
 ---
-# Extra information about JobMatcher AI For Developers and Enthusiasts
+# 🔍 Extra information about JobMatcher AI For Developers and Enthusiasts
 
 
 
@@ -75,7 +75,7 @@ pip install -r requirements.txt
 ---
 
 ## Data Collection and Preprocessing 
-### 📡 Web Scraping - Collecting Job Listings
+### Web Scraping - Collecting Job Listings
 #### **📝 Files:**
 - `indeed_scraper.py` - The job listing scraper.
 - `run_scraper.py` - Runs the scraper in a loop every few hours.
@@ -84,7 +84,7 @@ pip install -r requirements.txt
 - Requires **Bright Data** credentials (**USERNAME** and **PASSWORD**). Store is in the `.env` file.
 - The scraper runs automatically when `run_scraper.py` is executed.
 
-### 📊 Data Preprocessing and Vector Database Setup
+### Data Preprocessing and Vector Database Setup
 #### **🔍 Files:**
 - `analys_preprocess_and_vectordb.ipynb` - Jupyter Notebook for:
   - 🛠️ **Data cleaning** and **preprocessing** with **Apache Spark**.
