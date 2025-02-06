@@ -1,37 +1,36 @@
-os
-python-dotenv
-time
-logging
-datetime
+# Core dependencies first
+numpy
 pandas
-random
-re
-urllib.parse
-json
-concurrent.futures
-dataclasses
-typing
-queue
-threading
+tqdm
+
+# Machine Learning & NLP packages
+torch
+transformers
+sentence-transformers
+spacy
+python-louvain
+rapidfuzz
+
+# Data Processing & Web Scraping
 selenium
 beautifulsoup4
-tqdm
-pyspark
-matplotlib
-seaborn
-numpy
-networkx
-sentence-transformers
-python-louvain
-spacy
-pinecone-client
 PyPDF2
 python-docx
+
+# Data Science & Visualization
+networkx
+matplotlib
+seaborn
+
+# Distributed Computing
+pyspark
+
+# Cloud & AI Services
+pinecone-client
 cohere
-transformers
-torch
-rapidfuzz
+
+# Web Framework
 streamlit
 
-# Ensure the spaCy model is installed
-spacy-en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.5.0/en_core_web_sm-3.5.0.tar.gz
+# Environment Management
+python-dotenv
