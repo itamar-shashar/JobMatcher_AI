@@ -4,10 +4,11 @@
 
 ---
 
+
 ## 📖 Table of Contents
 
 - [💡 Overview](#overview)
-- [⚙️ How to Use the Job Matcher AI App](#⚙️-how-to-use-the-job-matcher-ai-app)
+- [⚙️ How to Use the Job Matcher AI App](#how-to-use-the-job-matcher-ai-app)
 - [🛠️ System Architecture](#system-architecture)
 - [🌎 Data Collection and Preprocessing](#data-collection-and-preprocessing)
   - [📡 Web Scraping - Collecting Job Listings](#web-scraping---collecting-job-listings)
@@ -35,7 +36,7 @@ It features:
 
 ---
 
-## ⚙️ How to Use the Job Matcher AI App
+## How to Use the Job Matcher AI App
 
 ### 📦 Installation & Requirements
 Ensure all dependencies are installed using the `requirements.txt` file.
@@ -62,7 +63,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🛠️ System Architecture
+## System Architecture
 
 🖼️ *(Insert a diagram here showcasing the entire RAG pipeline, including query refinement, retrieval, reranking, and response generation.)*
 
