@@ -1,4 +1,4 @@
-# Job Matcher AI - Your Smart AI-Powered Job Search Assistant
+<h1 align="center" style="font-size: 10em;">Job Matcher AI - Your Smart AI-Powered Job Search Assistant</h1>
 
 🔍 Finding the right job shouldn't feel like searching for a needle in a haystack. **Job Matcher AI** is an AI-powered job search assistant that leverages **Retrieval-Augmented Generation (RAG)**, **vector search**, **LLM-driven query refinement**, and **intelligent reranking** to deliver highly relevant job recommendations.
 
@@ -62,14 +62,21 @@ pip install -r requirements.txt
 5. ⏳ **Expect an initial load time of 20-30 seconds.**
 
 ---
-# 🔍 Extra information about JobMatcher AI For Developers and Enthusiasts
+<h1 align="center" style="font-size: 3em; margin-bottom: 20px;">
+    🔍 Extra Information About Job Matcher AI For Developers and Enthusiasts
+</h1>
+
+<p align="center" style="font-size: 1.1em; color: gray;">
+    The following sections are not required to run the app. This is simply to enrich your knowledge about the entire process.
+</p>
+
 
 
 
 ## System Architecture
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/10ce8b02-b19a-46fc-90ff-cadd32ee431d" alt="System Architecture">
+  <img src="https://github.com/user-attachments/assets/0f0750ba-da32-424f-9ee2-e3487c4e6ee0" alt="System Architecture">
 </p>
 
 ---
@@ -81,7 +88,7 @@ pip install -r requirements.txt
 - `run_scraper.py` - Runs the scraper in a loop every few hours.
 
 #### **🔑 Requirements:**
-- Requires **Bright Data** credentials (**USERNAME** and **PASSWORD**). Store is in the `.env` file.
+- Requires **Bright Data** credentials (**USERNAME** and **PASSWORD**). Need to store it in the `.env` file.
 - The scraper runs automatically when `run_scraper.py` is executed.
 
 ### Data Preprocessing and Vector Database Setup
@@ -95,9 +102,18 @@ pip install -r requirements.txt
 
 #### **⚙️ How to Run:**
 - Best run on **Databricks** due to large-scale data processing.
-- 📂 Upload the **parquet dataset** (`combined_data_80k.parquet` or `combined_data_190k.parquet`) to Databricks.
-- Set the **data directory, Pinecone API key, and index name** in the first cell of the notebook.
-- ⏳ **Running this step takes time, but it is not necessary to use the app**, as the data is already stored in Pinecone.
+- 📂 The dataset is not included in this repository. You need to either:
+  1. **Obtain access** to the preprocessed parquet file.
+  2. **Create your own parquet file** containing the following columns:
+     - `company`, `title`, `location`, `job_type`, `salary`, `seniority`, `url`, `description`.
+
+    Example for Dataset Structure:
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6176bff0-c2ad-4d6f-87ed-59beb4b99f36" alt="Example Dataset" style="width:80%;">>
+</p>
+
+- Set the **data directory, Pinecone API key, and index name** in the first cell of the notebook (need to copy from the .env file).
+- ⏳ **Running this step takes time, but it is not necessary to use the app**, as the data must already exist in Pinecone.
 
 ---
 
