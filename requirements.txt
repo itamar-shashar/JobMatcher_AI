@@ -1,0 +1,14 @@
+numpy
+scipy
+networkx
+python-louvain
+langchain
+sentence-transformers
+nltk
+torch
+tqdm
+pandas
+matplotlib
+seaborn
+selenium
+beautifulsoup4
