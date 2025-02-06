@@ -47,7 +47,7 @@ pip install -r requirements.txt
 ```
 
 ### 🎯 Running the Job Matcher AI App
-#### **📂 Files Needed (found in the [app](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/app) folder):**
+#### **📂 Files Needed (from the [app](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/app) folder):**
 - `main_app_code.py` - The core backend logic that retrieves, ranks, and refines job matches.
 - `streamlit_app.py` - The Streamlit UI to interact with the system.
 
@@ -81,7 +81,7 @@ pip install -r requirements.txt
 
 ## Data Collection and Preprocessing 
 ### Web Scraping - Collecting Job Listings
-#### **📝 Files (found in the [web scraping](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/web%20scraping) folder):**
+#### **📝 Files (from the [web scraping](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/web%20scraping) folder):**
 - `indeed_scraper.py` - The job listing scraper.
 - `run_scraper.py` - Runs the scraper in a loop every few hours.
 
@@ -90,7 +90,7 @@ pip install -r requirements.txt
 - The scraper runs automatically when `run_scraper.py` is executed.
 
 ### Data Preprocessing and Vector Database Setup
-#### **🔍 Files:**
+#### **🔍 Files (from the [preprocessing and pinecone](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/preprocessing%20and%20pinecone) folder:**
 - `analys_preprocess_and_vectordb.ipynb` - Jupyter Notebook for:
   - 🛠️ **Data cleaning** and **preprocessing** with **Apache Spark**.
   - 🔡 **Text normalization** and **feature engineering** (e.g., adding education level, filling missing values).
