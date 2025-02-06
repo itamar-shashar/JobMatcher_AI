@@ -77,6 +77,8 @@ python3 -m spacy download en_core_web_sm
 3. The app will launch on a local host.
 4. ⏳ **Expect an initial load time of 20-30 seconds.**
 
+**Note**: All possitions in the database are located in USA.
+
 ---
 <h1 align="center" style="font-size: 3em; margin-bottom: 20px;">
     🔍 Extra Information About Job Matcher AI For Developers and Enthusiasts
