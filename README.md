@@ -18,7 +18,7 @@
 
 ---
 
-## 💡 Overview
+## Overview
 
 **Job Matcher AI** uses state-of-the-art AI models to help users find the most relevant job listings by refining user queries, searching vector databases, and ranking results intelligently. 
 
