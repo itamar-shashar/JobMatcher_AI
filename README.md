@@ -7,7 +7,7 @@
 ## 📖 Table of Contents
 
 - [💡 Overview](#overview)
-- [⚙️ How to Use the Job Matcher AI App](#how-to-use-the-job-matcher-ai-app)
+- [⚙️ How to Use the Job Matcher AI App](#⚙️-how-to-use-the-job-matcher-ai-app)
 - [🛠️ System Architecture](#system-architecture)
 - [🌎 Data Collection and Preprocessing](#data-collection-and-preprocessing)
   - [📡 Web Scraping - Collecting Job Listings](#web-scraping---collecting-job-listings)
