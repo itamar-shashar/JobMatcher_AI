@@ -42,6 +42,7 @@ It features:
 Store the files in the `app` folder, the `requierments.txt` and the .env file (need to get access) in the same directory
 
 ### 📦 Installation & Requirements
+Make sure Python 3.11 or higher is installed on your computer.
 Ensure all dependencies are installed using the `requirements.txt` file.
 
 Run these commands in your IDE terminal (it is recommended to create and activate a new virtual environment first):
@@ -49,8 +50,14 @@ Run these commands in your IDE terminal (it is recommended to create and activat
 pip install -r requirements.txt
 ```
 And after all libraries are installed, run this comand to install the SpaCy model:
+
+On Windows:
 ```bash
 python -m spacy download en_core_web_sm
+```
+On Mac:
+```bash
+python3 -m spacy download en_core_web_sm
 ```
 
 ### 🎯 Running the Job Matcher AI App
