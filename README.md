@@ -69,7 +69,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🌎 Data Collection and Preprocessing (For Developers and Enthusiasts)
+## Data Collection and Preprocessing (For Developers and Enthusiasts)
 
 ### 📡 Web Scraping - Collecting Job Listings
 #### **📝 Files:**
@@ -97,14 +97,14 @@ pip install -r requirements.txt
 
 ---
 
-## 🔮 Notes & Future Improvements
+## Notes & Future Improvements
 - 🔑 The `.env` file containing API keys is **not included** in this repository and must be obtained separately.
 - 📌 The preprocessing step is **not required** to run the app, as the job data is already indexed.
 - ⚡ Future work will focus on **optimizing speed**, **improving prompt engineering**, and **scaling the system** to integrate with real-time job boards.
 
 ---
 
-## 📜 License
+## License
 This project is intended for educational and research purposes.
 
 💬 For any inquiries, please open an issue or reach out to the contributors.
