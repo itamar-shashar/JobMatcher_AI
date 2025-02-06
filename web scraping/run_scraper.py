@@ -1,10 +1,14 @@
+import os
+from dotenv import load_dotenv
+
+
 # ============= USER CONFIGURATION =============
 # Bright Data Credentials
-USERNAME = 'brd-customer-hl_80709a30-zone-jeremy_test' # Insert the username from Bright Data
-PASSWORD = 'k2mfgum7pt2a' # Insert the password from Bright Data
+load_dotenv()
+USERNAME = os.getenv("USERNAME")
+PASSWORD = os.getenv("PASSWORD")
 
 # Companies to Scrape
-
 COMPANIES_DIR = "adir_companies.csv" # Insert the directory to your companies.csv file
 START_IDX = 2110
 END_IDX = 2300
