@@ -10,8 +10,8 @@ PASSWORD = os.getenv("PASSWORD")
 
 # Companies to Scrape
 COMPANIES_DIR = "adir_companies.csv" # Insert the directory to your companies.csv file
-START_IDX = 2110
-END_IDX = 2300
+START_IDX = 0 # Set to the company index you want to start from
+END_IDX = 2000 # Set to the company index you want to end the scraping
 NUM_THREADS = 3
 MAX_JOBS_PER_COMPANY = 50
 
