@@ -41,9 +41,13 @@ It features:
 ### 📦 Installation & Requirements
 Ensure all dependencies are installed using the `requirements.txt` file.
 
-Run this command on your IDE terminal:
+Run these commands in your IDE terminal (it is recommended to create and activate a new virtual environment first):
 ```bash
 pip install -r requirements.txt
+```
+And after all libraries are installed, run this comand to install the SpaCy model:
+```bash
+python -m spacy download en_core_web_sm
 ```
 
 ### 🎯 Running the Job Matcher AI App
@@ -56,7 +60,7 @@ pip install -r requirements.txt
 2. Make sure you get access to the `.env` file that contains the API keys for **Pinecone** and **Cohere**, as it is required to run the application.
 3. Open a terminal, navigate to the app directory, and run:
    ```bash
-   streamlit run streamlit_app.py
+   streamlit run streamlit_app.py --server.fileWatcherType none
    ```
 4. The app will launch on a local host.
 5. ⏳ **Expect an initial load time of 20-30 seconds.**
