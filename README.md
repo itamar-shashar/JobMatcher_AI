@@ -38,6 +38,9 @@ It features:
 
 ## How to Use the Job Matcher AI App
 
+### 🛠️ Preparations
+Store the files in the `app` folder, the `requierments.txt` and the .env file (need to get access) in the same directory
+
 ### 📦 Installation & Requirements
 Ensure all dependencies are installed using the `requirements.txt` file.
 
@@ -51,19 +54,21 @@ python -m spacy download en_core_web_sm
 ```
 
 ### 🎯 Running the Job Matcher AI App
-#### **📂 Files Needed (from the [app](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/app) folder):**
+#### **📂  Files You Need to Store in the Same Directory:
+1. The files from the from the [app](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/app) folder:**
 - `main_app_code.py` - The core backend logic that retrieves, ranks, and refines job matches.
 - `streamlit_app.py` - The Streamlit UI to interact with the system.
+2. The `requirements.txt` file.
+3. The `.env` file (need to get access).
 
 #### **▶️ Setup Instructions:**
-1. Ensure `main_app_code.py` and `streamlit_app.py` are in the same directory.
-2. Make sure you get access to the `.env` file that contains the API keys for **Pinecone** and **Cohere**, as it is required to run the application.
-3. Open a terminal on your IDE, navigate to the app directory, and run:
+1. Make sure you get access to the `.env` file that contains the API keys for **Pinecone** and **Cohere**, as it is required to run the application. Store it in the same directory as the app
+2. Open a terminal on your IDE, navigate to the app directory, and run:
    ```bash
    streamlit run streamlit_app.py --server.fileWatcherType none
    ```
-4. The app will launch on a local host.
-5. ⏳ **Expect an initial load time of 20-30 seconds.**
+3. The app will launch on a local host.
+4. ⏳ **Expect an initial load time of 20-30 seconds.**
 
 ---
 <h1 align="center" style="font-size: 3em; margin-bottom: 20px;">
