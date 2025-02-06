@@ -58,7 +58,7 @@ python -m spacy download en_core_web_sm
 #### **▶️ Setup Instructions:**
 1. Ensure `main_app_code.py` and `streamlit_app.py` are in the same directory.
 2. Make sure you get access to the `.env` file that contains the API keys for **Pinecone** and **Cohere**, as it is required to run the application.
-3. Open a terminal, navigate to the app directory, and run:
+3. Open a terminal on your IDE, navigate to the app directory, and run:
    ```bash
    streamlit run streamlit_app.py --server.fileWatcherType none
    ```
