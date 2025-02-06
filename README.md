@@ -47,7 +47,7 @@ pip install -r requirements.txt
 ```
 
 ### 🎯 Running the Job Matcher AI App
-#### **📂 Files Needed (found in the `app` folder):**
+#### **📂 Files Needed (found in the [app](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/app) folder):**
 - `main_app_code.py` - The core backend logic that retrieves, ranks, and refines job matches.
 - `streamlit_app.py` - The Streamlit UI to interact with the system.
 
@@ -81,7 +81,7 @@ pip install -r requirements.txt
 
 ## Data Collection and Preprocessing 
 ### Web Scraping - Collecting Job Listings
-#### **📝 Files (from the `web scraping` folder):**
+#### **📝 Files (found in the [web scraping](https://github.com/itamar-shashar/JobMatcher_AI/tree/main/web%20scraping) folder):**
 - `indeed_scraper.py` - The job listing scraper.
 - `run_scraper.py` - Runs the scraper in a loop every few hours.
 
