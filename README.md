@@ -53,7 +53,7 @@ pip install -r requirements.txt
 
 #### **▶️ Setup Instructions:**
 1. Ensure `main_app_code.py` and `streamlit_app.py` are in the same directory.
-2. Obtain API keys for **Pinecone** and **Cohere**, and store them in a `.env` file (not included in this repository).
+2. Make sure you get access to the `.env` file that contains the API keys for **Pinecone** and **Cohere**, as it is required to run the application.
 3. Open a terminal, navigate to the app directory, and run:
    ```bash
    streamlit run streamlit_app.py
@@ -62,22 +62,26 @@ pip install -r requirements.txt
 5. ⏳ **Expect an initial load time of 20-30 seconds.**
 
 ---
+# Extra information about JobMatcher AI For Developers and Enthusiasts
+
+
 
 ## System Architecture
 
-🖼️ *(Insert a diagram here showcasing the entire RAG pipeline, including query refinement, retrieval, reranking, and response generation.)*
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/10ce8b02-b19a-46fc-90ff-cadd32ee431d" alt="System Architecture">
+</p>
 
 ---
 
-## Data Collection and Preprocessing (For Developers and Enthusiasts)
-
+## Data Collection and Preprocessing 
 ### 📡 Web Scraping - Collecting Job Listings
 #### **📝 Files:**
 - `indeed_scraper.py` - The job listing scraper.
 - `run_scraper.py` - Runs the scraper in a loop every few hours.
 
 #### **🔑 Requirements:**
-- Requires **Bright Data** credentials (**USERNAME** and **PASSWORD**) stored in the `.env` file.
+- Requires **Bright Data** credentials (**USERNAME** and **PASSWORD**). Store is in the `.env` file.
 - The scraper runs automatically when `run_scraper.py` is executed.
 
 ### 📊 Data Preprocessing and Vector Database Setup
