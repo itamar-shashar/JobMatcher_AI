@@ -2,9 +2,10 @@
 
 🔍 Finding the right job shouldn't feel like searching for a needle in a haystack. **Job Matcher AI** is an AI-powered job search assistant that leverages **Retrieval-Augmented Generation (RAG)**, **vector search**, **LLM-driven query refinement**, and **intelligent reranking** to deliver highly relevant job recommendations.
 <p align="center">
-  <a href="https://youtu.be/Io-KNOamMjQ">
+  <a href="https://youtu.be/Io-KNOamMjQ" target="_blank" rel="noopener noreferrer">
     <strong>Watch JobMatcher AI demo video</strong>
   </a>
+</p>
 
 ---
 
@@ -95,7 +96,7 @@ python3 -m spacy download en_core_web_sm
     The following sections are not required to run the app. This is simply to enrich your knowledge about the entire process.
 </p>
 <p align="center">
-  <a href="https://youtu.be/SNkJpsNC6Ks">
+  <a href="https://youtu.be/SNkJpsNC6Ks" target="_blank" rel="noopener noreferrer">
     <strong>Watch JobMatcher AI Technical Overview</strong>
   </a>
 </p>
