@@ -45,7 +45,7 @@ Store the files in the `app` folder, the `requierments.txt` and the .env file (n
 Make sure Python 3.11 or higher is installed on your computer.
 Ensure all dependencies are installed using the `requirements.txt` file.
 
-Run these commands in your IDE terminal (it is recommended to create and activate a new virtual environment first):
+Run these commands in your IDE terminal to install all dependencies (it is recommended to create and activate a new virtual environment first):
 ```bash
 pip install -r requirements.txt
 ```
