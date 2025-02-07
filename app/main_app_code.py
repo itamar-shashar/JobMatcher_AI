@@ -264,7 +264,7 @@ def _vector_search(index, embeddings_model, refined_query, titles_embeddings_mod
 
     # Filter jobs based on title and similarity
     for idx, similarity in enumerate(similarities):
-        if similarity >= 0.6:
+        if similarity >= 0.7:
             match = content_matches[idx].copy()
             match['title_score'] = float(similarity)
             filtered_matches.append(match)
