@@ -108,35 +108,29 @@ Return ONLY a JSON object in this exact format (without any additional text):
 
 Remember: Only use information that is clearly supported by the user's query or CV. If the necessary details are not present, do not infer or make up information—return null for that field."""
 
-GENERATOR_PROMPT = """You are an expert job search assistant. Focus ONLY on what's explicitly mentioned in the user's query: "{refined_query}" and their resume: 
-
-### User Resume:
+GENERATOR_PROMPT = """You are an expert job search assistant matching user query: "{refined_query}" and resume:
 {resume}
-
-Compare this query and resume with these job opportunities:
-
+Against these opportunities:
 {job_texts}
+Return JSON array of matching jobs. Each object must have:
 
-Return ONLY a JSON array of objects, where each object MUST have:
-- "job_number": the number of the job (1, 2, or 3) **(Only if the job is a match)**
-- "summary": starts with "This position matches your search because", maximum 2 lines, only concrete matches
+"job_number": job number (1, 2, or 3)
+"summary": starts with "This position matches your search because", max 2 lines, concrete matches only
 
-### **Requirements for Including a Job in the Results:**
-A job **must be excluded** if **any** of the following conditions are met:
-1. **Irrelevant job title** → The job title does **not match** the intent of the query.
-2. **Mismatch in required education** → The user **does not meet** the job’s minimum education level.
-3. **Insufficient years of experience** → The job **requires more experience** than the user has.
-4. **Location mismatch** → If the query specifies a **location**, but the job is in a **different location**, **exclude it** (unless the job is remote).
-5. **General mismatch** → The job **lacks strong alignment** with both the query and resume.
+Exclude jobs that have ANY:
+    1. Title not matching query intent
+    2. Education requirements above user's level
+    3. Experience requirements above user's level
+    3. Location mismatch (unless remote)
+    4. Poor alignment with query/resume
 
-### **🔹 Summary Requirements**
-- **Must start with:** `"This position matches your search because"`.
-- **Only mention concrete matches** between **query, resume, and job description**.
-- **Be factual**—no assumptions or vague statements.
-- **Be at most 2 lines long**.
+Summary requirements:
+    1. Start with "This position matches your search because".
+    2. Only concrete matches between query, resume, job.
+    3. Factual, no assumptions - do not make things up about the user.
+    4. The summary must be maximum 2 lines long!
 
-
-**Important:** If none of the jobs meet the criteria, return an **empty JSON array** (`[]`).
+Return [] if no matches.
 """
 
 
@@ -413,29 +407,21 @@ def _create_job_suggestions(refined_query, resume, aggregated_jobs, cohere_clien
     response = cohere_client.generate(
         prompt=prompt,
         model="command-nightly",
-        max_tokens=300,
+        max_tokens=400,
         temperature=0.2,
         k=1,
     )
 
     try:
         summaries = json.loads(response.generations[0].text)
-        
-        # Create a mapping of job number to summary
-        summary_map = {
-            item['job_number']: item['summary'] 
+        return [
+            {
+                "summarization": item['summary'],
+                "metadata": aggregated_jobs[item['job_number']-1]['metadata']
+            }
             for item in summaries
-        }
-        
-        # Combine summaries with selected metadata
-        results = []        
-        for i, job in enumerate(aggregated_jobs, start=1):
-            results.append({
-                "summarization": summary_map.get(i, "No summary available"),  
-                "metadata": job['metadata']
-            })
-        
-        return results
+            if 'summary' in item and item['summary']  # Check summary exists and is not empty
+        ]
     except json.JSONDecodeError as e:
         raise ValueError(f"Invalid JSON from Cohere: {response.generations[0].text}") from e
 
