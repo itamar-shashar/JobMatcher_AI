@@ -106,7 +106,10 @@ Return ONLY a JSON object in this exact format (without any additional text):
   }}
 }}
 
-Remember: Only use information that is clearly supported by the user's query or CV. If the necessary details are not present, do not infer or make up information—return null for that field."""
+Remember: Only use information that is clearly supported by the user's query or CV. If the necessary details are not present, do not infer or make up information—return null for that field.
+"""
+
+
 
 GENERATOR_PROMPT = """You are an expert job search assistant matching user query: "{refined_query}" and resume:
 {resume}
@@ -118,7 +121,7 @@ Return JSON array of matching jobs. Each object must have:
 "summary": starts with "This position matches your search because", max 2 lines, concrete matches only
 
 Exclude jobs that have ANY:
-    1. Title not matching query intent
+    1. Title very different from query intent
     2. Education requirements above user's level
     3. Experience requirements above user's level
     3. Location mismatch (unless remote)
@@ -129,6 +132,8 @@ Summary requirements:
     2. Only concrete matches between query, resume, job.
     3. Factual, no assumptions - do not make things up about the user.
     4. The summary must be maximum 2 lines long!
+
+**Important:** If there are duplications in the jobs at the job_texts (titles, companies and locations are exactly(!!) the same), keep only one version of the duplications and drop the rest of the duplications.
 
 Return [] if no matches.
 """
@@ -223,8 +228,8 @@ def _vector_search(index, embeddings_model, refined_query, titles_embeddings_mod
     """Two-stage search: content match with threshold, then title similarity with separate threshold"""
     
     # Build filter dictionary
-    filter_dict = {key: {'$eq': filters[key]} for key in ["location", "education", "seniority"] if filters.get(key)}
-    if filters.get("job_type"):
+    filter_dict = {key: {'$eq': filters[key]} for key in ["location", "education", "seniority"] if filters.get(key) and filters.get(key) != 'None'}
+    if filters.get("job_type") and filters.get("job_type") != 'None':
         filter_dict["job_type"] = {"$in": [filters["job_type"]]}
 
     # Stage 1: Content-based search
@@ -246,7 +251,8 @@ def _vector_search(index, embeddings_model, refined_query, titles_embeddings_mod
 
     if not content_matches:
         return [] # No relevant content matches found, return empty list
-
+    
+        
     # Stage 2: Title refinement
     titles = [item['metadata']['title'] for item in content_matches]
     title_embeddings = titles_embeddings_model.encode(titles, normalize_embeddings=True)
@@ -258,7 +264,7 @@ def _vector_search(index, embeddings_model, refined_query, titles_embeddings_mod
 
     # Filter jobs based on title and similarity
     for idx, similarity in enumerate(similarities):
-        if similarity >= score_threshold:
+        if similarity >= 0.6:
             match = content_matches[idx].copy()
             match['title_score'] = float(similarity)
             filtered_matches.append(match)
