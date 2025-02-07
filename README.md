@@ -69,13 +69,16 @@ python3 -m spacy download en_core_web_sm
 3. The `.env` file (need to get access).
 
 #### **▶️ Setup Instructions:**
-1. Make sure you get access to the `.env` file that contains the API keys for **Pinecone** and **Cohere**, as it is required to run the application. Store it in the same directory as the app
-2. Open a terminal on your IDE, navigate to the app directory, and run:
+1. Ensure you have access to the `.env` file containing the API keys for **Pinecone** and **Cohere**. This file is required to run the application and must be stored in the same directory as the app files.
+   - **On Windows:** Simply place the `.env` file in the same folder as the project files.
+   - **On Mac:** Create a new `.env` file in the same folder as the project files. Then, copy the content of the original `.env` file and paste it into the newly created file.
+
+3. Open a terminal on your IDE, navigate to the app directory, and run:
    ```bash
    streamlit run streamlit_app.py --server.fileWatcherType none
    ```
-3. The app will launch on a local host.
-4. ⏳ **Expect an initial load time of 20-30 seconds.**
+4. The app will launch on a local host.
+5. ⏳ **Expect an initial load time of 20-30 seconds.**
 
 **Note**: All possitions in the database are located in USA.
 
