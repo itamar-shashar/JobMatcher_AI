@@ -18,6 +18,7 @@ from pinecone import Pinecone as PineconeClient
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
+import numpy as np
 
 # Utils
 from rapidfuzz import fuzz
@@ -153,12 +154,15 @@ def init_llms_and_tools():
     reranking_tokenizer = AutoTokenizer.from_pretrained("cross-encoder/ms-marco-MiniLM-L-6-v2")
     reranking_model = AutoModelForSequenceClassification.from_pretrained("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
+    titles_embeddings_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+
     return {
         'cohere_client': cohere_client,
         'embeddings_model': embeddings_model,
         'pinecone_index': pinecone_index,
         'reranking_tokenizer': reranking_tokenizer,
         'reranking_model': reranking_model,
+        'titles_embeddings_model': titles_embeddings_model,
     }
 
 
@@ -221,62 +225,53 @@ def _refine_query_with_cv(query, cv_text, cohere_client):
 # =============================================================================
 # Step 3: Search the Pincone vectorstore
 # =============================================================================
-def _vector_search(index, embeddings_model, refined_query, filters, top_k=50, score_threshold=0.8):
-    """Two-stage search: content match first, then refine with title match"""
-
-    # Build basic filter dictionary
+def _vector_search(index, embeddings_model, refined_query, titles_embeddings_model, filters, top_k=50, score_threshold=0.8):
+    """Two-stage search: content match with threshold, then title similarity with separate threshold"""
+    
+    # Build filter dictionary
     filter_dict = {key: {'$eq': filters[key]} for key in ["location", "education", "seniority"] if filters.get(key)}
     if filters.get("job_type"):
         filter_dict["job_type"] = {"$in": [filters["job_type"]]}
 
-    # Stage 1: Content-based search using the refined query
+    # Stage 1: Content-based search
     content_embedding = embeddings_model.encode(refined_query, normalize_embeddings=True).tolist()
     content_results = index.query(
         vector=content_embedding,
         filter=filter_dict,
-        top_k=top_k * 2,  # Get more results to refine in the second stage
+        top_k=top_k,
         include_metadata=True
     )
-
-    # Extract only relevant information and apply initial score threshold
-    content_matches = [{'id': item.id, 'metadata': item.metadata, 'score': item.score} for item in content_results.matches if item.score >= score_threshold]
     
-    # # Apply initial score threshold
-    # content_matches = [item for item in content_results if item.matches.score >= score_threshold]
+    # Extract only relevant information and apply initial score threshold
+    content_matches = [
+        {'id': item.id, 'metadata': item.metadata, 'score': item.score} 
+        for item in content_results.matches 
+        if item.score >= score_threshold
+    ]
+    
 
     if not content_matches:
-        return []  # No relevant content matches found, return empty list
+        return [] # No relevant content matches found, return empty list
 
-    # Get job_ids of content matches
-    matched_job_ids = [item['metadata']['job_id'] for item in content_matches]
+    # Stage 2: Title refinement
+    titles = [item['metadata']['title'] for item in content_matches]
+    title_embeddings = titles_embeddings_model.encode(titles, normalize_embeddings=True)
+    query_embedding = titles_embeddings_model.encode(filters['title'], normalize_embeddings=True)
 
-    # Update the filter dictionary to include only the matched job IDs
-    filter_dict["job_id"] = {"$in": matched_job_ids}
+    # Calculate similarities and filter by threshold
+    similarities = np.dot(title_embeddings, query_embedding)
+    filtered_matches = []
 
-    # Stage 2: Title-based refinement on the filtered job IDs
-    if filters.get("title"):
-        title_query = f"Title: {filters['title']} role position job"
-        title_embedding = embeddings_model.encode(title_query, normalize_embeddings=True).tolist()
-
-        title_results = index.query(
-            vector=title_embedding,
-            filter=filter_dict,
-            top_k=top_k,
-            include_metadata=True
-        )
-
-        # Apply final score threshold
-        return [
-            {"id": item.id, "metadata": item.metadata, "score": item.score}
-            for item in title_results.matches
-            if item.score >= score_threshold
-        ]
-
-    # If no title filter, return the content-based results
-    return [
-        {"id": item.id, "metadata": item.metadata, "score": item.score}
-        for item in content_matches
-    ]
+    # Filter jobs based on title and similarity
+    for idx, similarity in enumerate(similarities):
+        if similarity >= score_threshold:
+            match = content_matches[idx].copy()
+            match['title_score'] = float(similarity)
+            filtered_matches.append(match)
+    
+    # Sort by title similarity
+    filtered_matches.sort(key=lambda x: x['title_score'], reverse=True)
+    return filtered_matches
 
 
 # =============================================================================
@@ -448,8 +443,6 @@ def _create_job_suggestions(refined_query, resume, aggregated_jobs, cohere_clien
 # =============================================================================
 # Step 6: Overall Process Function
 # =============================================================================
-
-
 def process_search(llms_and_tools, query, cv_file=None, progress_callback=None):
     """
     Main search function that:
@@ -474,6 +467,7 @@ def process_search(llms_and_tools, query, cv_file=None, progress_callback=None):
         progress_callback("🔎 Searching job database...", 0.3)
     search_results = _vector_search(index=llms_and_tools['pinecone_index'], 
                                     embeddings_model=llms_and_tools['embeddings_model'], 
+                                    titles_embeddings_model=llms_and_tools['titles_embeddings_model'],
                                     refined_query=refined_query, 
                                     filters=filters
                                     )
