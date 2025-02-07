@@ -1,6 +1,10 @@
 <h1 align="center" style="font-size: 10em;">Job Matcher AI - Your Smart AI-Powered Job Search Assistant</h1>
 
 🔍 Finding the right job shouldn't feel like searching for a needle in a haystack. **Job Matcher AI** is an AI-powered job search assistant that leverages **Retrieval-Augmented Generation (RAG)**, **vector search**, **LLM-driven query refinement**, and **intelligent reranking** to deliver highly relevant job recommendations.
+<p align="center">
+  <a href="https://youtu.be/Io-KNOamMjQ">
+    <strong>Watch JobMatcher AI demo video</strong>
+  </a>
 
 ---
 
@@ -89,6 +93,11 @@ python3 -m spacy download en_core_web_sm
 
 <p align="center" style="font-size: 1.1em; color: gray;">
     The following sections are not required to run the app. This is simply to enrich your knowledge about the entire process.
+</p>
+<p align="center">
+  <a href="https://youtu.be/SNkJpsNC6Ks">
+    <strong>Watch JobMatcher AI Technical Overview</strong>
+  </a>
 </p>
 
 
